@@ -1,7 +1,6 @@
-package com.example.neurable.data
+package com.example.neurable.data.focusscore
 
-import com.example.neurable.data.model.FocusScore
-import com.example.neurable.data.repository.FocusScoreRepository
+import com.example.neurable.data.focusscore.model.FocusScore
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

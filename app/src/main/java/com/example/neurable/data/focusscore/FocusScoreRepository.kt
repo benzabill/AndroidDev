@@ -1,6 +1,6 @@
-package com.example.neurable.data.repository
+package com.example.neurable.data.focusscore
 
-import com.example.neurable.data.model.FocusScore
+import com.example.neurable.data.focusscore.model.FocusScore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +12,7 @@ class FocusScoreRepository @Inject constructor(
     fun focusScoreFlow(): Flow<FocusScore> = flow {
         while (true) {
             emit(generateRandomFocusScore())
-            delay(1000L)
+            delay(5000L)
         }
     }
 

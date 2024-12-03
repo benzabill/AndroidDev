@@ -1,10 +1,25 @@
 <resources>
     <string name="app_name">Neurable</string>
-    <string name="application_title">Application Title</string>
-    <string name="detail_title">Detail Title</string>
-    <string name="show_less">Show Less</string>
-    <string name="show_more">Show More\n</string>
-    <string name="toggle">Toggle</string>
+
+    <!--  Focus Management -->
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="current_focus_score">Current Focus Score: %s</string>
+    <string name="last_focus_score">Last Focus Score: %s</string>
+    <string name="calculating">Calculating</string>
+
+    <!--  Bluetooth Management -->
+    <string name="bluetooth_scanning">Scanning</string>
+    <string name="bluetooth_connecting">Connecting</string>
+    <string name="bluetooth_connected">Connected</string>
+    <string name="bluetooth_disconnected">Disconnected</string>
+    <string name="bluetooth_error">Error</string>
+    <string name="bluetooth_off">Off</string>
+    <string name="bluetooth_on">On</string>
+    <string name="bluetooth_unknown">Unknown</string>
+    <string name="connect_device">Connect</string>
+    <string name="manage_device">Manage</string>
+    <string name="connected">Connected</string>
+    <string name="not_connected">Not Connected</string>
+    <string name="select_device">Select Device</string>
 </resources>
