@@ -1,93 +1,17 @@
-# AndroidDev
-Technical Challenge
-# Neurable Android Technical Challenge
-
-## Objective
-Build a simplified Android app to demonstrate your ability to design a basic UI and simulate device communication relevant to EEG-based focus monitoring.
-
----
-
-## Requirements
-
-### User Interface
-- Use **Jetpack Compose** to create a simple screen that displays a "focus score" (simulated) that updates in real-time.
-- Include a button to start/stop the focus monitoring.
-
-### Data Simulation
-- Simulate receiving a "focus score" (e.g., a random number generator between 0 and 100) that updates every 5 seconds.
-- Ensure the app can start and stop the data simulation when the button is clicked.
-
-### BLE Simulation
-- Simulate connecting to a **BLE device** (no need for actual device communication).
-- Implement a basic BLE scan and connection UI flow (simulating this with state management is sufficient).
-
-### Asynchronous Programming
-- Use **Kotlin Coroutines** to handle the simulated focus score updates asynchronously, ensuring the UI remains responsive.
-
-### Code Quality
-- Structure your code to be modular and clean, showcasing your understanding of best practices.
-
----
-
-## Bonus (Optional)
-- Write a single **unit test** for the focus score simulation logic using **JUnit**.
-
----
-
-## Evaluation Criteria
-Your submission will be assessed based on the following:
-
-1. **UI Design**  
-   - Clean, minimal interface using Jetpack Compose.
-
-2. **Data Simulation**  
-   - Proper simulation of focus score and BLE interaction.
-
-3. **Asynchronous Handling**  
-   - Effective use of Kotlin Coroutines to manage data updates.
-
-4. **Code Structure**  
-   - Clean, modular code that follows best practices.
-
----
-
-## Submission Instructions
-
-1. **Clone the Submission Repository**
-   - Clone the submission repository to your local machine:
-     ```bash
-     git clone https://github.com/Thrive-Staffing/AndroidDev.git
-     ```
-
-2. **Complete the Challenge**
-   - Implement the required features as outlined above.
-   - Include a `README.md` file in your submission with:
-     - Your approach to solving the challenge.
-     - Steps to build and run the app.
-     - Any additional notes or assumptions.
-
-3. **Build and Include an APK (Optional but Recommended)**  
-   - Generate an APK file:
-     - Open the project in Android Studio.
-     - Go to `Build > Build Bundle(s)/APK(s) > Build APK(s)`.
-   - Add the APK to the repository or provide a link in your `README.md` file.
-
-4. **Submit Your Work**
-   - Push your changes to the `AndroidDev` repository:
-     ```bash
-     git add .
-     git commit -m "Completed Neurable Android Technical Challenge"
-     git push origin main
-     ```
-   - Notify us via email or your designated contact person once your submission is complete.
-
----
-
-## Expected Time Commitment
-- This challenge is designed to take **2-3 hours** for an experienced developer.
-- Focus on core tasks like UI design, data simulation, and state management.
-
----
-
-We look forward to your submission! If you have any questions, please contact us at **[Insert Contact Email]**.
-
+ - Hello Neurable!
+ - Here's my submission:
+ - Your approach to solving the challenge.
+    - To mimic the Neurable headphones product, first you must connect to a device. Then the data will begin collecting. The app gives feedback based on your EEG readings. You can pause and restart the data transfer.
+    - We want this app to be highly reactive while interacting with data streams coming from other hardware. So I used an MVVM architecture to separate concerns like connecting to the device, collecting readings, and managing app UI.
+    - To help separate concerns, I used the concept of a Repository as the data storage layer, and the UseCase as the business logic layer.
+    - The Viewmodel handles the UI state and the interaction between the View and the UseCase, and in combination with LiveData allows easy lifecyle management.
+ - Steps to build and run the app.
+    - I've built the apk for your convenience: ben-tseytlin-app-submission.apk
+    - A unit test for focus score generation: FocusScoreFlowTest
+ - Any additional notes or assumptions.
+   - This was my first time working with Jetpack Compose. I've always worked with XML and various binding systems. I thought it would be interesting to learn Jetpack Compose as it was requested for this exercise.
+   - Obviously I kept it pretty limited on the UI side, but it satisfies the requirements as described!
+   - I would be interested to learn more of the best practices with Jetpack Compose as there are clearly various ways to pass around data, state and callbacks.
+   - Jetpack Compose was interesting and certainly is powerful. It was fun to be able to create (essentially) a recycler view with just a few lines of code, although Jetpack Compose is not without it's downsides.
+   - I would add significantly more UI to this app: animations, icons (a pulsing EEG, for example), a flushed out navigation implementation including back button from the Bluetooth Connection screen.
+ - Cheers, Ben

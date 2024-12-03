@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             NeurableTheme {
                 Column {
                     TopAppBar(
-                        title = { Text(text = "Adopt Me") },
+                        title = { Text(text = "Neurable") },
                         colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
                             titleContentColor = MaterialTheme.colorScheme.primary,
