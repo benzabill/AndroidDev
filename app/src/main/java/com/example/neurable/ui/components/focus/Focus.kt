@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.neurable.R
 import com.example.neurable.data.focusscore.model.FocusScore
@@ -24,7 +23,7 @@ import com.example.neurable.data.focusscore.model.FocusScore
 @Composable
 fun FocusScoreCard(
     focusScore: FocusScore,
-    toggleState: Boolean,
+    shouldCalculateFocusScore: Boolean,
     context: Context,
     onToggleFocusScore: () -> Unit,
     modifier: Modifier = Modifier
@@ -41,14 +40,14 @@ fun FocusScoreCard(
             .height(200.dp)
             .fillMaxWidth()
     ) {
-        FocusScoreCardContent(focusScore, toggleState, context, onToggleFocusScore)
+        FocusScoreCardContent(focusScore, shouldCalculateFocusScore, context, onToggleFocusScore)
     }
 }
 
 @Composable
 private fun FocusScoreCardContent(
     focusScore: FocusScore = FocusScore(31),
-    toggleState: Boolean = true,
+    shouldCalculateFocusScore: Boolean = true,
     context: Context,
     onToggleFocusScore: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -60,7 +59,7 @@ private fun FocusScoreCardContent(
         Row(
             modifier = modifier
         ) {
-            val focusText = if (toggleState) {
+            val focusText = if (shouldCalculateFocusScore) {
                 stringResource(
                     R.string.current_focus_score,
                     focusScore.getDisplay(context)
@@ -77,9 +76,9 @@ private fun FocusScoreCardContent(
             )
             Spacer(modifier = Modifier.weight(1f))
             ElevatedButton(onClick = {
-                onToggleFocusScore() // Pass the callback up the chain
+                onToggleFocusScore()
             }) {
-                val buttonText = if (toggleState) R.string.stop else R.string.start
+                val buttonText = if (shouldCalculateFocusScore) R.string.stop else R.string.start
                 Text(text = stringResource(buttonText))
             }
         }

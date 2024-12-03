@@ -54,7 +54,9 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
     implementation ("com.google.code.gson:gson:2.10.1")
     implementation("androidx.compose.material3:material3-android:1.3.1")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
     testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
@@ -76,7 +78,6 @@ dependencies {
     implementation ("androidx.activity:activity-compose:1.9.3")
     debugImplementation ("androidx.compose.ui:ui-tooling:1.7.5")
     debugImplementation ("androidx.compose.ui:ui-test-manifest:1.7.5")
-
 }
 
 // Allow references to generated code

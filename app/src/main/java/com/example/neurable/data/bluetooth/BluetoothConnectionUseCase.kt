@@ -2,7 +2,6 @@ package com.example.neurable.data.bluetooth
 
 import com.example.neurable.data.bluetooth.model.BluetoothConnectionResult
 import com.example.neurable.data.bluetooth.model.BluetoothDevice
-import com.example.neurable.data.focusscore.FocusScoreRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 

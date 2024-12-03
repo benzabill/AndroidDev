@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    val focusScoreUseCase: FocusScoreUseCase,
-    val findAvailableDevicesUseCase: FindAvailableDevicesUseCase,
-    val bluetoothConnectionUseCase: BluetoothConnectionUseCase,
+    private val focusScoreUseCase: FocusScoreUseCase,
+    private val findAvailableDevicesUseCase: FindAvailableDevicesUseCase,
+    private val bluetoothConnectionUseCase: BluetoothConnectionUseCase,
 ) : ViewModel() {
 
     private var flowJob: Job? = null // We hold on to the Job so that we can cancel the flow.
@@ -58,14 +58,17 @@ class MainActivityViewModel @Inject constructor(
     fun connectDevice(bluetoothDevice: BluetoothDevice) {
         viewModelScope.launch {
             val bluetoothConnectionResult = bluetoothConnectionUseCase.connect(bluetoothDevice)
-            when (bluetoothConnectionResult) {
-                is BluetoothConnectionResult.Error -> bluetoothStateLiveData.postValue(
+            val newState = when (bluetoothConnectionResult) {
+                is BluetoothConnectionResult.Error -> {
                     BluetoothState.Error(bluetoothConnectionResult.bluetoothConnectionError)
-                )
-                is BluetoothConnectionResult.Success -> bluetoothStateLiveData.postValue(
+                }
+
+                is BluetoothConnectionResult.Success -> {
                     BluetoothState.Connected(bluetoothConnectionResult.bluetoothDevice)
-                )
+                }
             }
+            bluetoothStateLiveData.postValue(newState)
+            initializeFocusFlow()
         }
     }
 }

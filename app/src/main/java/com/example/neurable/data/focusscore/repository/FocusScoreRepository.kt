@@ -1,4 +1,4 @@
-package com.example.neurable.data.focusscore
+package com.example.neurable.data.focusscore.repository
 
 import com.example.neurable.data.focusscore.model.FocusScore
 import kotlinx.coroutines.delay
@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class FocusScoreRepository @Inject constructor(
-//    private val remoteUserRepository: RemoteUserRepository
 ) {
     fun focusScoreFlow(): Flow<FocusScore> = flow {
         while (true) {

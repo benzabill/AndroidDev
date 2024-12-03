@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
@@ -16,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.neurable.R
 import com.example.neurable.data.bluetooth.model.BluetoothState
 
@@ -34,8 +34,7 @@ fun BluetoothCard(
             .padding(
                 vertical = dimensionResource(R.dimen.padding_vertical),
                 horizontal = dimensionResource(R.dimen.padding_horizontal)
-            )
-            .height(200.dp)
+            ).wrapContentSize()
     ) {
         BluetoothCardContent(bluetoothState, triggerBluetoothConnection, modifier)
     }
@@ -44,7 +43,7 @@ fun BluetoothCard(
 @Preview
 @Composable
 private fun BluetoothCardContent(
-    bluetoothState: BluetoothState = BluetoothState.Unknown,
+    bluetoothState: BluetoothState = BluetoothState.Disconnected,
     triggerBluetoothConnection: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
@@ -74,8 +73,7 @@ private fun BluetoothCardContent(
                     }
                 }
 
-                BluetoothState.Disconnected,
-                BluetoothState.Unknown -> {
+                BluetoothState.Disconnected -> {
                     Text(
                         text = stringResource(R.string.not_connected), modifier = Modifier
                             .padding(dimensionResource(R.dimen.padding))

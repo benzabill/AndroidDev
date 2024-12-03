@@ -7,6 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -28,14 +34,28 @@ class MainActivity : AppCompatActivity() {
 
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NeurableTheme {
-                HomePage()
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                titleContentColor = MaterialTheme.colorScheme.primary,
+                            ),
+                            title = {
+                                Text("Neurable")
+                            }
+                        )
+                    },
+                ) { innerPadding ->
+                    HomePage(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
-        mainActivityViewModel.initializeFocusFlow()
     }
 
     @Preview
@@ -45,7 +65,6 @@ class MainActivity : AppCompatActivity() {
     ) {
         val focusScore = mainActivityViewModel.focusScoreLiveData.observeAsState()
         val bluetoothState = mainActivityViewModel.bluetoothStateLiveData.observeAsState()
-
         val shouldCalculateFocusScore = remember { mutableStateOf(true) }
 
         val bluetoothStateValue = bluetoothState.value
@@ -59,18 +78,20 @@ class MainActivity : AppCompatActivity() {
                     .padding(vertical = dimensionResource(R.dimen.padding_vertical))
                     .fillMaxWidth()
             ) {
-                FocusScoreCard(
-                    focusScore.value ?: FocusScore(null),
-                    shouldCalculateFocusScore.value,
-                    context = this@MainActivity,
-                    {
-                        val newToggleState = !shouldCalculateFocusScore.value
-                        shouldCalculateFocusScore.value = newToggleState
-                        mainActivityViewModel.toggleFocusFlow(newToggleState)
-                    })
-                BluetoothCard(bluetoothState.value ?: BluetoothState.Unknown, {
+                BluetoothCard(bluetoothState.value ?: BluetoothState.Disconnected, {
                     mainActivityViewModel.triggerBluetoothConnection()
                 })
+                if (bluetoothState.value is BluetoothState.Connected) {
+                    FocusScoreCard(
+                        focusScore.value ?: FocusScore(null),
+                        shouldCalculateFocusScore.value,
+                        context = this@MainActivity,
+                        {
+                            val newToggleState = !shouldCalculateFocusScore.value
+                            shouldCalculateFocusScore.value = newToggleState
+                            mainActivityViewModel.toggleFocusFlow(newToggleState)
+                        })
+                }
             }
         }
     }
