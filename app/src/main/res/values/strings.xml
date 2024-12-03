@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Neurable</string>
+    <string name="application_title">Application Title</string>
+    <string name="detail_title">Detail Title</string>
+    <string name="show_less">Show Less</string>
+    <string name="show_more">Show More\n</string>
+    <string name="toggle">Toggle</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+</resources>
