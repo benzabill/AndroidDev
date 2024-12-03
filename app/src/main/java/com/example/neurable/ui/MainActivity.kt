@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -18,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.neurable.R
 import com.example.neurable.data.bluetooth.model.BluetoothState
 import com.example.neurable.data.focusscore.model.FocusScore
@@ -37,20 +39,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NeurableTheme {
-                Column {
-                    TopAppBar(
-                        title = { Text(text = "Adopt Me") },
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            titleContentColor = MaterialTheme.colorScheme.primary,
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                titleContentColor = MaterialTheme.colorScheme.primary,
+                            ),
+                            title = {
+                                Text("Neurable")
+                            }
                         )
-                    )
-                    HomePage(modifier = Modifier)
+                    },
+                ) { innerPadding ->
+                    HomePage(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 
+    @Preview
     @Composable
     fun HomePage(
         modifier: Modifier = Modifier,
@@ -61,12 +69,9 @@ class MainActivity : AppCompatActivity() {
 
         val bluetoothStateValue = bluetoothState.value
         if (bluetoothStateValue is BluetoothState.AvailableDevices) {
-            ConnectBluetoothCard(
-                bluetoothStateValue, { bluetoothDevice ->
-                    mainActivityViewModel.connectDevice(bluetoothDevice)
-                },
-                modifier = modifier
-            )
+            ConnectBluetoothCard(bluetoothStateValue, { bluetoothDevice ->
+                mainActivityViewModel.connectDevice(bluetoothDevice)
+            })
         } else {
             Column(
                 modifier = modifier

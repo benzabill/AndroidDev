@@ -3,6 +3,7 @@ package com.example.neurable.ui.components.bluetooth.connect
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,19 +29,16 @@ fun ConnectBluetoothCard(
 ) {
     Column(modifier) {
         Text(
-            text = stringResource(R.string.connect_to_device), modifier = modifier.padding(
-                dimensionResource(R.dimen.padding)
-            )
+            text = stringResource(R.string.select_device), modifier = Modifier
+                .padding(dimensionResource(R.dimen.padding))
         )
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primary
             ),
             modifier = modifier
-                .padding(
-                    vertical = dimensionResource(R.dimen.padding_vertical),
-                    horizontal = dimensionResource(R.dimen.padding_horizontal)
-                )
+                .fillMaxSize()
+                .padding(dimensionResource(R.dimen.padding))
         ) {
             ConnectBluetoothCardContent(bluetoothState, onToggleFocusScore, modifier)
         }
@@ -61,6 +59,7 @@ private fun ConnectBluetoothCardContent(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer
         ),
         modifier = modifier
+            .fillMaxSize()
     ) {
         LazyColumn {
             items(bluetoothState.bluetoothDevices) { bluetoothDevice ->
